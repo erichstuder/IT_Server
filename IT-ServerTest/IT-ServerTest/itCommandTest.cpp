@@ -15,6 +15,8 @@
  * along with this program.  If not, see <://www.gnu.org/licenses/>.
  */
 
+#ifndef ARDUINO
+
 #include "CppUTest/TestHarness.h"
 #include "CppUTestExt/MockSupport.h"
 #include "CppUTestExt/MockSupport_c.h"
@@ -327,3 +329,5 @@ TEST(ItCommandTest, unlog) {
         .andReturnValue(ItError_NoError);
     logSignals();
 }
+
+#endif

@@ -103,7 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(CPPUTEST_HOME)/include;$(CPPUTEST_HOME)/include/Platforms/VisualCpp;$(ProjectDir)..\..\;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CPPUTEST_HOME)/include;$(CPPUTEST_HOME)/include/Platforms/VisualCpp;$(ProjectDir)..\..\IT-Server;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,9 +144,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\it.c" />
-    <ClCompile Include="..\..\itCommand.c" />
-    <ClCompile Include="..\..\itTelegram.c" />
+    <ClCompile Include="..\..\IT-Server\it.c" />
+    <ClCompile Include="..\..\IT-Server\itCommand.c" />
+    <ClCompile Include="..\..\IT-Server\itTelegram.c" />
     <ClCompile Include="AllTests.cpp" />
     <ClCompile Include="itCommandTest.cpp" />
     <ClCompile Include="itTelegramTest.cpp" />

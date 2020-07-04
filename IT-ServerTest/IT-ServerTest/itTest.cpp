@@ -15,6 +15,8 @@
  * along with this program.  If not, see <://www.gnu.org/licenses/>.
  */
 
+#ifndef ARDUINO
+
 #include "CppUTest/TestHarness.h"
 #include "CppUTestExt/MockSupport.h"
 #include "CppUTestExt/MockSupport_c.h"
@@ -239,3 +241,5 @@ TEST(ItTest_NoMock, logSignals) {
 	mock().expectOneCall("logSignals_Mock");
 	itTick();
 }
+
+#endif
