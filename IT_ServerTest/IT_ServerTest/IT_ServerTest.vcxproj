@@ -21,9 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{A4A98454-923A-449F-8ECA-586AF06807BB}</ProjectGuid>
-    <RootNamespace>IT-ServerTest</RootNamespace>
+    <RootNamespace>IT_ServerTest</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>IT-ServerTest</ProjectName>
+    <ProjectName>IT_ServerTest</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -103,7 +103,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(CPPUTEST_HOME)/include;$(CPPUTEST_HOME)/include/Platforms/VisualCpp;$(ProjectDir)..\..\IT-Server;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(CPPUTEST_HOME)/include;$(CPPUTEST_HOME)/include/Platforms/VisualCpp;$(ProjectDir)..\..\IT_Server;$(ProjectDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,9 +144,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\IT-Server\it.c" />
-    <ClCompile Include="..\..\IT-Server\itCommand.c" />
-    <ClCompile Include="..\..\IT-Server\itTelegram.c" />
+    <ClCompile Include="..\..\IT_Server\it.c" />
+    <ClCompile Include="..\..\IT_Server\itCommand.c" />
+    <ClCompile Include="..\..\IT_Server\itTelegram.c" />
     <ClCompile Include="AllTests.cpp" />
     <ClCompile Include="itCommandTest.cpp" />
     <ClCompile Include="itTelegramTest.cpp" />
