@@ -27,10 +27,10 @@ typedef enum {
 	ItValueType_Float,
 } ItValueType_t;
 
-typedef const struct {
+typedef const struct __ItSignal_t{ //TODO: warum braucht dieser Typ einen Namen? __ItSignal_t
 	const char* const name;
 	const ItValueType_t valueType;
-	void (*getter) (void); //TODO: testen ob getter und setter nicht verändert werden können.
+	void (*getter) (void); //TODO: testen ob getter und setter nicht verÃ¤ndert werden kÃ¶nnen.
 	void (*setter) (void);
 } ItSignal_t;
 
