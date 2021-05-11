@@ -78,11 +78,10 @@ static ItError_t sendCommandResult(ItCommandResult_t* result) {
             ->withDoubleParameters("result->resultFloat", result->resultFloat)
             ->withIntParameters("result->valueType", result->valueType);
         break;
+	default:
+		break;
     }
-#pragma warning(push)
-#pragma warning(disable : 26812)
     return (ItError_t)mock_c()->returnValue().value.intValue;
-#pragma warning(pop)
 }
 
 static ItSignal_t itSignals[] = {

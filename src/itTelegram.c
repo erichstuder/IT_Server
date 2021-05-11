@@ -33,20 +33,20 @@
 static WriteByteToClient_t writeByteToClient;
 
 static ItError_t sendValueTelegramFirstPart(const char* const valueName, unsigned char valueTypeId);
-static ItError_t sendValueTelegramSecondPart(unsigned long timestamp);
+static ItError_t sendValueTelegramSecondPart(uint32_t timestamp);
 static ItError_t sendStart(void);
 static ItError_t sendEnd(void);
 static ItError_t sendContentByte(const unsigned char data);
 static ItError_t sendString(const char* const str);
-static ItError_t sendTimestamp(unsigned long value);
-static ItError_t sendUnsignedLong(unsigned long value);
+static ItError_t sendTimestamp(uint32_t value);
+static ItError_t sendUnsignedLong(uint32_t value);
 static ItError_t sendFloat(float value);
 
 void itTelegramInit(WriteByteToClient_t writeByteToClientCallback) {
     writeByteToClient = writeByteToClientCallback;
 }
 
-ItError_t itSendValueTelegram_Int8(const char* const valueName, signed char value, unsigned long timestamp) {
+ItError_t itSendValueTelegram_Int8(const char* const valueName, signed char value, uint32_t timestamp) {
     ItError_t err = sendValueTelegramFirstPart(valueName, ItValueType_Int8_Id);
     if (err != ItError_NoError) { return err; }
 
@@ -59,7 +59,7 @@ ItError_t itSendValueTelegram_Int8(const char* const valueName, signed char valu
     return ItError_NoError;
 }
 
-ItError_t itSendValueTelegram_Uint8(const char* const valueName, unsigned char value, unsigned long timestamp) {
+ItError_t itSendValueTelegram_Uint8(const char* const valueName, unsigned char value, uint32_t timestamp) {
     ItError_t err = sendValueTelegramFirstPart(valueName, ItValueType_Uint8_Id);
     if (err != ItError_NoError) { return err; }
 
@@ -72,7 +72,7 @@ ItError_t itSendValueTelegram_Uint8(const char* const valueName, unsigned char v
     return ItError_NoError;
 }
 
-ItError_t itSendValueTelegram_Ulong(const char* const valueName, unsigned long value, unsigned long timestamp) {
+ItError_t itSendValueTelegram_Ulong(const char* const valueName, uint32_t value, uint32_t timestamp) {
     ItError_t err = sendValueTelegramFirstPart(valueName, ItValueType_Ulong_Id);
     if (err != ItError_NoError) { return err; }
 
@@ -85,7 +85,7 @@ ItError_t itSendValueTelegram_Ulong(const char* const valueName, unsigned long v
     return ItError_NoError;
 }
 
-ItError_t itSendValueTelegram_Float(const char* const valueName, float value, unsigned long timestamp) {
+ItError_t itSendValueTelegram_Float(const char* const valueName, float value, uint32_t timestamp) {
     ItError_t err = sendValueTelegramFirstPart(valueName, ItValueType_Float_Id);
     if (err != ItError_NoError) { return err; }
 
@@ -130,7 +130,7 @@ static ItError_t sendValueTelegramFirstPart(const char* const valueName, unsigne
     return ItError_NoError;
 }
 
-static ItError_t sendValueTelegramSecondPart(unsigned long timestamp) {
+static ItError_t sendValueTelegramSecondPart(uint32_t timestamp) {
     ItError_t err = sendTimestamp(timestamp);
     if (err != ItError_NoError) { return err; }
 
@@ -178,15 +178,15 @@ static ItError_t sendString(const char* const str) {
     return ItError_NoError;
 }
 
-static ItError_t sendTimestamp(unsigned long timestamp) {
+static ItError_t sendTimestamp(uint32_t timestamp) {
     return sendUnsignedLong(timestamp);
 }
 
-static ItError_t sendUnsignedLong(unsigned long value) {
+static ItError_t sendUnsignedLong(uint32_t value) {
     ItError_t err;
     union {
-        unsigned long value;
-        unsigned char valueBytes[sizeof(unsigned long)];
+        uint32_t value;
+        unsigned char valueBytes[sizeof(uint32_t)];
     } data;
     data.value = value;
 

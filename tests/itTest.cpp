@@ -17,6 +17,8 @@
 
 #ifndef ARDUINO
 
+#include <string.h>
+
 #include "CppUTest/TestHarness.h"
 #include "CppUTestExt/MockSupport.h"
 #include "CppUTestExt/MockSupport_c.h"
@@ -36,20 +38,14 @@ static bool byteFromClientAvailable(void) {
 
 static ItError_t readByteFromClient(char* const data) {
 	mock_c()->actualCall("readByteFromClient")->withOutputParameter("data", data);
-#pragma warning(push)
-#pragma warning(disable : 26812)
 	return (ItError_t)mock_c()->returnValue().value.intValue;
-#pragma warning(pop) 
 }
 
 static ItError_t writeByteToClient(const unsigned char data) {
 	mock_c()->actualCall("writeByteToClient");
 	writeByteToClient_buffer[writeByteToClient_bufferCount] = data;
 	writeByteToClient_bufferCount++;
-#pragma warning(push)
-#pragma warning(disable : 26812)
 	return ItError_NoError;
-#pragma warning(pop)
 }
 
 static unsigned long getTimeStamp(void) {
@@ -57,13 +53,13 @@ static unsigned long getTimeStamp(void) {
 	return mock_c()->returnValue().value.intValue;
 }
 
-static signed char int8Function(void) {
+/*static signed char int8Function(void) {
 	return 0x11;
-}
+}*/
 
-static unsigned char uint8Function(void) {
+/*static unsigned char uint8Function(void) {
 	return 0x45;
-}
+}*/
 
 static float floatFunction(void) {
 	return 1.26f;

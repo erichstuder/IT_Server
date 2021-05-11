@@ -27,10 +27,7 @@ extern "C" {
 ItError_t writeByteToClient_Mock(const unsigned char byte) {
     mock_c()->actualCall("writeByteToClient_Mock")
         ->withIntParameters("byte", byte);
-#pragma warning(push)
-#pragma warning(disable : 26812)
     return ItError_NoError;
-#pragma warning(pop)
 }
 
 TEST_GROUP(ItTelegramTest) {
@@ -47,7 +44,7 @@ TEST_GROUP(ItTelegramTest) {
 TEST(ItTelegramTest, Int8) {
     unsigned char expectedTelegram[] = {0xAA, 0x01, 'm', 'y', 'V', 'a', 'l', 'u', 'e', '\0', 1, 0x23, 0x78, 0x56, 0x34, 0x12, 0xBB};
     mock().strictOrder();
-    for (int n = 0; n < sizeof(expectedTelegram); n++) {
+    for (unsigned int n = 0; n < sizeof(expectedTelegram); n++) {
         mock().expectOneCall("writeByteToClient_Mock")
             .withParameter("byte", expectedTelegram[n]);
     }
@@ -57,7 +54,7 @@ TEST(ItTelegramTest, Int8) {
 TEST(ItTelegramTest, Uint8) {
     unsigned char expectedTelegram[] = { 0xAA, 0x01, 'm', 'y', 'V', 'a', 'l', 'u', 'e', '\0', 2, 0xFF, 0xDD, 0xCC, 0xCB, 0xCC, 0xBA, 0xCC, 0xA9, 0xBB };
     mock().strictOrder();
-    for (int n = 0; n < sizeof(expectedTelegram); n++) {
+    for (unsigned int n = 0; n < sizeof(expectedTelegram); n++) {
         mock().expectOneCall("writeByteToClient_Mock")
             .withParameter("byte", expectedTelegram[n]);
     }
@@ -67,7 +64,7 @@ TEST(ItTelegramTest, Uint8) {
 TEST(ItTelegramTest, Ulong) {
     unsigned char expectedTelegram[] = { 0xAA, 0x01, 'm', 'y', 'V', 'a', 'l', 'u', 'e', '\0', 3, 0x33, 0x22, 0x11, 0x00, 0xEE, 0xEE, 0xEE, 0xEE, 0xBB };
     mock().strictOrder();
-    for (int n = 0; n < sizeof(expectedTelegram); n++) {
+    for (unsigned int n = 0; n < sizeof(expectedTelegram); n++) {
         mock().expectOneCall("writeByteToClient_Mock")
             .withParameter("byte", expectedTelegram[n]);
     }
@@ -77,17 +74,19 @@ TEST(ItTelegramTest, Ulong) {
 TEST(ItTelegramTest, Float) {
     unsigned char expectedTelegram[] = { 0xAA, 0x01, 'm', 'y', 'V', 'a', 'l', 'u', 'e', '\0', 4, 0x48, 0xe1, 0xcc, 0xA9, 0x40, 0x66, 0x66, 0x66, 0x66, 0xBB };
     mock().strictOrder();
-    for (int n = 0; n < sizeof(expectedTelegram); n++) {
+    for (unsigned int n = 0; n < sizeof(expectedTelegram); n++) {
         mock().expectOneCall("writeByteToClient_Mock")
             .withParameter("byte", expectedTelegram[n]);
     }
-    itSendValueTelegram_Float("myValue", 5.34f, 0x66666666);
+
+    ItError_t err = itSendValueTelegram_Float("myValue", 5.34f, 0x66666666);
+    LONGS_EQUAL(err, ItError_NoError);
 }
 
 TEST(ItTelegramTest, String) {
     unsigned char expectedTelegram[] = { 0xAA, 0x02, 'h', 'e', 'l', 'l', 'o', '\0', 0xBB };
     mock().strictOrder();
-    for (int n = 0; n < sizeof(expectedTelegram); n++) {
+    for (unsigned int n = 0; n < sizeof(expectedTelegram); n++) {
         mock().expectOneCall("writeByteToClient_Mock")
             .withParameter("byte", expectedTelegram[n]);
     }

@@ -18,6 +18,7 @@
 #ifndef IT_TELEGRAM_H
 #define IT_TELEGRAM_H
 
+#include <stdint.h>
 #include "itError.h"
 
 #define TelegramStart 0xAA
@@ -27,10 +28,10 @@
 typedef ItError_t(*WriteByteToClient_t) (const unsigned char data);
 
 void itTelegramInit(WriteByteToClient_t writeByteToClientCallback);
-ItError_t itSendValueTelegram_Int8(const char* const valueName, signed char value, unsigned long timestamp);
-ItError_t itSendValueTelegram_Uint8(const char* const valueName, unsigned char value, unsigned long timestamp);
-ItError_t itSendValueTelegram_Ulong(const char* const valueName, unsigned long value, unsigned long timestamp);
-ItError_t itSendValueTelegram_Float(const char* const valueName, float value, unsigned long timestamp);
+ItError_t itSendValueTelegram_Int8(const char* const valueName, signed char value, uint32_t timestamp);
+ItError_t itSendValueTelegram_Uint8(const char* const valueName, unsigned char value, uint32_t timestamp);
+ItError_t itSendValueTelegram_Ulong(const char* const valueName, uint32_t value, uint32_t timestamp);
+ItError_t itSendValueTelegram_Float(const char* const valueName, float value, uint32_t timestamp);
 ItError_t itSendStringTelegram(const char* const str);
 
 #endif
