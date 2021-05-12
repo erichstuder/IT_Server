@@ -101,9 +101,13 @@ static ItError_t handleLogCommand(const char* const command) {
 	for (n = 0; n < signalCount; n++) {
 		ItSignal_t* signalPtr = &(signals[n]);
 		const unsigned char LogCommandPrefixLength = strlen(LogCommandPrefix);
-		if (strcmp(signalPtr->name, command + LogCommandPrefixLength) == 0) {
-			return addSignalToLog(signalPtr);
+		if(strcmp(signalPtr->name, command + LogCommandPrefixLength) != 0) {
+			continue;
 		}
+		if(signalPtr->getter == NULL){
+			return ItError_NoGetter;
+		}
+		return addSignalToLog(signalPtr);
 	}
 	return ItError_InvalidCommand;
 }
@@ -217,8 +221,9 @@ static ItError_t handleSetCommand(const char* const command) {
 		return ItError_InvalidValueType;
 	}
 	
-	readSignalValue(&(signals[signalIndex]));
-
+	if(signals[signalIndex].getter != NULL){
+		return readSignalValue(&(signals[signalIndex]));
+	}
 	return ItError_NoError;
 }
 
@@ -250,28 +255,32 @@ ItError_t logSignals_Implementation(void) {
 ItError_t (*logSignals) (void) = logSignals_Implementation;
 
 static ItError_t readSignalValue(ItSignal_t* signal) {
+	void (*getter)(void) = signal->getter;
+	if(getter == NULL){
+		return ItError_NoGetter;
+	}
+
 	ItCommandResult_t result;
 	result.name = signal->name;
 	switch (signal->valueType) {
 	case ItValueType_Int8:
 		result.valueType = ItValueType_Int8;
-		result.resultInt8 = ((signed char (*) (void)) signal->getter)();
+		result.resultInt8 = ((signed char (*) (void)) getter)();
 		break;
 	case ItValueType_Uint8:
 		result.valueType = ItValueType_Uint8;
-		result.resultUint8 = ((unsigned char (*) (void)) signal->getter)();
+		result.resultUint8 = ((unsigned char (*) (void)) getter)();
 		break;
 	case ItValueType_Ulong:
 		result.valueType = ItValueType_Ulong;
-		result.resultUlong = ((unsigned long (*) (void)) signal->getter)();
+		result.resultUlong = ((unsigned long (*) (void)) getter)();
 		break;
 	case ItValueType_Float:
 		result.valueType = ItValueType_Float;
-		result.resultFloat = ((float (*) (void)) signal->getter)();
+		result.resultFloat = ((float (*) (void)) getter)();
 		break;
 	default:
 		return ItError_InvalidValueType;
-		break;
 	}
 	return sendResult(&result);
 }

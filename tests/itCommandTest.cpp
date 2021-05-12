@@ -88,7 +88,7 @@ static ItSignal_t itSignals[] = {
     {
         "InvalidType",
         (ItValueType_t)99,
-        (void (*)(void)) NULL,
+        (void (*)(void)) getInt8,
         NULL,
     },
     {
@@ -120,6 +120,12 @@ static ItSignal_t itSignals[] = {
         ItValueType_Float,
         NULL,
         NULL,
+    },
+    {
+        "GetterNull",
+        ItValueType_Float,
+        NULL,
+        (void (*)(void)) setFloat,
     },
 };
 
@@ -198,6 +204,11 @@ TEST(ItCommandTest, GetFloat) {
     LONGS_EQUAL(ItError_NoError, err);
 }
 
+TEST(ItCommandTest, Get_NULL) {
+    ItError_t err = parseCommand("Null");
+    LONGS_EQUAL(ItError_NoGetter, err);
+}
+
 TEST(ItCommandTest, logValidCommand) {
     mock().expectNoCall("getFloat");
     mock().expectNoCall("sendCommandResult");
@@ -235,6 +246,11 @@ TEST(ItCommandTest, logSignals) {
     LONGS_EQUAL(ItError_NoError, err);
 
     err = logSignals();
+}
+
+TEST(ItCommandTest, log_Null) {
+    ItError_t err = parseCommand("log Null");
+    LONGS_EQUAL(ItError_NoGetter, err);
 }
 
 TEST(ItCommandTest, tooManySignalsToLog) {
@@ -285,6 +301,12 @@ TEST(ItCommandTest, SetSignalBadValue) {
 TEST(ItCommandTest, SetSignalNull) {
     ItError_t err = parseCommand("Null 8");
     LONGS_EQUAL(ItError_NoSetter, err);
+}
+
+TEST(ItCommandTest, SetWithGetterIsNull) {
+    mock().ignoreOtherCalls();
+    ItError_t err = parseCommand("GetterNull 67");
+    LONGS_EQUAL(ItError_NoError, err);
 }
 
 TEST(ItCommandTest, reset) {
