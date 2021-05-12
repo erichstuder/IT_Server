@@ -115,6 +115,12 @@ static ItSignal_t itSignals[] = {
         (void (*)(void)) getFloat,
         (void (*)(void)) setFloat,
     },
+    {
+        "Null",
+        ItValueType_Float,
+        NULL,
+        NULL,
+    },
 };
 
 TEST_GROUP(ItCommandTest) {
@@ -274,6 +280,11 @@ TEST(ItCommandTest, SetSignalNoValue) {
 TEST(ItCommandTest, SetSignalBadValue) {
     ItError_t err = parseCommand("Int8Value ae");
     LONGS_EQUAL(ItError_InvalidCommand, err);
+}
+
+TEST(ItCommandTest, SetSignalNull) {
+    ItError_t err = parseCommand("Null 8");
+    LONGS_EQUAL(ItError_NoSetter, err);
 }
 
 TEST(ItCommandTest, reset) {

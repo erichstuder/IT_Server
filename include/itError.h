@@ -24,8 +24,9 @@ typedef enum {
 	ItError_ClientWriteError,
 	ItError_NoDataAvailable,
 	ItError_InvalidValueType,
-    ItError_InvalidCommand,
-    ItError_MaximumOfLoggedSignalsReached,
+ 	ItError_InvalidCommand,
+	ItError_MaximumOfLoggedSignalsReached,
+	ItError_NoSetter,
 	ItError_Unknown,
 }ItError_t;
 

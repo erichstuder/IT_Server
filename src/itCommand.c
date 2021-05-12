@@ -196,21 +196,25 @@ static ItError_t handleSetCommand(const char* const command) {
 		return ItError_InvalidCommand;
 	}
 
+	void (*setter)(void) = signals[signalIndex].setter;
+	if(setter == NULL){
+		return ItError_NoSetter;
+	}
 	switch (signals[signalIndex].valueType) {
 	case ItValueType_Int8:
-		((void (*) (signed char))signals[signalIndex].setter)((signed char)value);
+		((void (*) (signed char))setter)((signed char)value);
 		break;
 	case ItValueType_Uint8:
-		((void (*) (unsigned char))signals[signalIndex].setter)((unsigned char)value);
+		((void (*) (unsigned char))setter)((unsigned char)value);
 		break;
 	case ItValueType_Ulong:
-		((void (*) (unsigned long))signals[signalIndex].setter)((unsigned long)value);
+		((void (*) (unsigned long))setter)((unsigned long)value);
 		break;
 	case ItValueType_Float:
-		((void (*) (float))signals[signalIndex].setter)((float)value);
+		((void (*) (float))setter)((float)value);
 		break;
 	default:
-		break;
+		return ItError_InvalidValueType;
 	}
 	
 	readSignalValue(&(signals[signalIndex]));
