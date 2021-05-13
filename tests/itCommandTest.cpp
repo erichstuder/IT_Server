@@ -156,7 +156,7 @@ TEST(ItCommandTest, InvalidGetCommand) {
 }
 
 TEST(ItCommandTest, GetInt8) {
-    const char Int8Value = -42;
+    int8_t Int8Value = -42;
     mock().expectOneCall("getInt8")
         .andReturnValue(Int8Value);
     mock().expectOneCall("sendCommandResult")
@@ -232,7 +232,7 @@ TEST(ItCommandTest, logSignals) {
         .withParameter("result->valueType", ItValueType_Ulong)
         .andReturnValue(ItError_NoError);
 
-    const char Int8Value = -99;
+    int8_t Int8Value = -99;
     mock().expectOneCall("getInt8").andReturnValue(Int8Value);
     mock().expectOneCall("sendCommandResult")
         .withParameter("result->name", "Int8Value")
