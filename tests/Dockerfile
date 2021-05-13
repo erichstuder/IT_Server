@@ -1,4 +1,4 @@
-FROM gcc:latest
+FROM gcc:10
 
 WORKDIR /home
 
