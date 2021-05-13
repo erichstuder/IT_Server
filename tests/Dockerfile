@@ -12,4 +12,5 @@ RUN git clone https://github.com/cpputest/cpputest.git && \
 
 ENV CPPUTEST_HOME="/home/cpputest"
 
-WORKDIR /home/src/tests
+WORKDIR /home/src
+
