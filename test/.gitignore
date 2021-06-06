@@ -1,2 +1,24 @@
 temp
 
+# files generated during setup
+cpputest-4.0/Makefile
+cpputest-4.0/Makefile.in
+cpputest-4.0/aclocal.m4
+cpputest-4.0/autom4te.cache/
+cpputest-4.0/config.h
+cpputest-4.0/config.h.in
+cpputest-4.0/config.h.in~
+cpputest-4.0/config.log
+cpputest-4.0/config.status
+cpputest-4.0/configure
+cpputest-4.0/cpputest.pc
+cpputest-4.0/generated
+cpputest-4.0/lib
+cpputest-4.0/libtool
+cpputest-4.0/platforms/Dos/ALLTESTS.BAT
+cpputest-4.0/**/.deps
+cpputest-4.0/src/CppUTest/.dirstamp
+cpputest-4.0/src/CppUTestExt/.dirstamp
+cpputest-4.0/src/Platforms/Gcc/.dirstamp
+cpputest-4.0/**/*.o
+cpputest-4.0/stamp-h1
