@@ -2,10 +2,12 @@
 SILENCE = @
 
 #---- Outputs ----#
-COMPONENT_NAME = tests/IT_Server
+COMPONENT_NAME = temp/IT_Server
 
 #--- Inputs ----#
-PROJECT_HOME_DIR = .
+PROJECT_HOME_DIR = ..
+
+CPPUTEST_HOME = cpputest-4.0
 ifeq "$(CPPUTEST_HOME)" ""
 $(error The environment variable CPPUTEST_HOME is not set. \
 Set it to where cpputest is installed)
@@ -25,7 +27,7 @@ endif
 # production code C and CPP files.
 #
 SRC_FILES +=
-SRC_DIRS += src
+SRC_DIRS += ../src
 
 # --- TEST_SRC_FILES and TEST_SRC_DIRS ---
 # Test files are always included in the build.
@@ -37,9 +39,7 @@ SRC_DIRS += src
 # TEST_SRC_DIRS, builds everything in the directory
 
 TEST_SRC_FILES +=
-TEST_SRC_DIRS += tests
-#	tests/example-fff \
-#	tests/fff \
+TEST_SRC_DIRS += .
 
 # --- MOCKS_SRC_DIRS ---
 # MOCKS_SRC_DIRS specifies a directories where you can put your
@@ -54,7 +54,7 @@ CPPUTEST_USE_EXTENSIONS = Y
 # containing directory
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include/Platforms/Gcc
-INCLUDE_DIRS += include
+INCLUDE_DIRS += ../include
 
 
 # --- CPPUTEST_OBJS_DIR ---
@@ -72,9 +72,9 @@ INCLUDE_DIRS += include
 #
 # This is kind of a kludge, but it causes the
 # .o and .d files to be put under objs.
-CPPUTEST_OBJS_DIR = tests/test-obj
+CPPUTEST_OBJS_DIR = temp/test-obj
 
-CPPUTEST_LIB_DIR = tests/test-lib
+CPPUTEST_LIB_DIR = temp/test-lib
 
 # You may have to tweak these compiler flags
 #    CPPUTEST_WARNINGFLAGS - apply to C and C++
